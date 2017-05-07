@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body,html{
+			padding:0;
+			margin: 0;
+			font-size: 14px;
+			color: #000;
+		}
+		table{
+			border-collapse: collapse;
+			width: 100%;
+			table-layout: fixed;
+		}
+		td{
+			border:1px solid #010101;
+			padding: 0;
+			height: 20px;
+			line-height: 20px;
+			/*width: 20px;*/
+
+		}
+		.current{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+<table>
+<thead>
+	<tr><th>-</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+</thead>
+<tbody>
+	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+<script type="text/javascript">
+//getDay()  返回日期中的星期几
+//getDate() 返回当前月份的日期,比如4.21返回21
+function calendar(year,month){
+	var today=new Date();
+	var start=(new Date(year,month-1,1)).getDay()-1;  //确定这个月的第一天是周几
+	if(start<0)start+=7;
+	var end=new Date((new Date(year,month))-1).getDate();  //确定这个月有多少天
+	var tds=document.getElementsByTagName('td');
+	var l=0;
+	for(var i=0;i<tds.length;i++){
+		if(i>=start&&l<end){
+			tds[i].innerText=i-start+1;
+			l++;
+		}
+		else{
+			tds[i].innerText='';
+		}
+		if(today.getDate()===i-start+1&&today.getMonth()===month-1&&today.getFullYear()===year){
+			tds[i].className="current";
+		}
+	}
+}
+calendar(2017,5);
+</script>
+</body>
+</html>
